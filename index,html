@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мактаби №1 — Будущее начинается здесь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-mid: #3d3d5c;
+    --ink-soft: #7b7b9b;
+    --cream: #f8f5ef;
+    --white: #ffffff;
+    --gold: #c9a84c;
+    --gold-light: #f0dcaa;
+    --blue: #1d4e89;
+    --blue-light: #d6e4f7;
+    --border: rgba(26,26,46,0.1);
+    --radius: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(248,245,239,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span {
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-mid);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 60px 4vw 60px;
+    gap: 4rem;
+  }
+
+  .hero-text { padding-right: 2rem; }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4.5vw, 4rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--blue); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: border-color 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .stat-icon.gold { background: var(--gold-light); }
+  .stat-icon.blue { background: var(--blue-light); }
+  .stat-icon.green { background: #d4edda; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
+  .hero-badge {
+    background: var(--blue);
+    color: var(--white);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .hero-badge p {
+    font-size: 0.875rem;
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-badge strong {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 4vw;
+  }
+
+  /* SECTION */
+  section {
+    padding: 80px 4vw;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .values-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .values-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+  }
+
+  .values-list .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  /* PROGRAMMES */
+  .prog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .prog-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .prog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,26,46,0.07);
+  }
+
+  .prog-emoji {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .prog-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .prog-desc {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .prog-tag {
+    margin-top: 1.25rem;
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    background: var(--blue-light);
+    color: var(--blue);
+  }
+
+  /* TEACHERS */
+  .teachers-section {
+    background: var(--ink);
+    color: var(--white);
+    margin: 0;
+    padding: 80px 4vw;
+  }
+
+  .teachers-section .section-title {
+    color: var(--white);
+  }
+
+  .teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .teacher-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .teacher-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .teacher-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+
+  .teacher-subject {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* NEWS */
+  .news-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .news-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+  }
+
+  .news-card.featured {
+    background: var(--blue);
+    color: var(--white);
+    border-color: transparent;
+  }
+
+  .news-date {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-card.featured .news-date { color: rgba(255,255,255,0.6); }
+
+  .news-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-card.featured .news-title { color: var(--white); font-size: 1.35rem; }
+
+  .news-excerpt {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .news-card.featured .news-excerpt { color: rgba(255,255,255,0.75); }
+
+  /* CONTACTS */
+  .contacts-section {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-label {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  form { display: flex; flex-direction: column; gap: 1rem; }
+
+  form input, form textarea {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--ink);
+    transition: border-color 0.2s;
+    outline: none;
+    resize: vertical;
+  }
+
+  form input:focus, form textarea:focus {
+    border-color: var(--blue);
+  }
+
+  form textarea { min-height: 100px; }
+
+  form button {
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  form button:hover { background: var(--blue); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  footer a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--ink); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; gap: 2rem; }
+    .hero-text { padding-right: 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .news-grid { grid-template-columns: 1fr; }
+    .contacts-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Мактаби<span>№1</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">О школе</a></li>
+    <li><a href="#programmes">Направления</a></li>
+    <li><a href="#teachers">Педагоги</a></li>
+    <li><a href="#news">Новости</a></li>
+    <li><a href="#contacts">Контакты</a></li>
+  </ul>
+  <a class="btn-primary" href="#contacts" style="padding:0.6rem 1.25rem; font-size:0.8rem;">Записаться</a>
+</nav>
+
+<!-- BANNER PHOTO -->
+<div style="margin-top: 64px; width: 100%; height: 420px; overflow: hidden; position: relative;">
+  <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAEjE-MEAGxG49h4worb3z2QhypIFdZCkobX9eDI9Vv27cXnJdGkZInMtiTjCsh60Z908EUVPe-NhDu0OSQKpNdNmMD0UU83sRPJKTU8owibSXiDRN3uiBVKSICleGkrOsJgBEeLxg=w1440-h720-k-no"
+    alt="Мактаби №1 — здание школы"
+    style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+  <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%); display: flex; align-items: flex-end; padding: 2.5rem 4vw;">
+    <div>
+      <p style="color: rgba(255,255,255,0.75); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem;">Душанбе, Таджикистан</p>
+      <h2 style="font-family: 'Playfair Display', serif; color: #fff; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.02em; margin: 0;">Мактаби №1</h2>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Город Душанбе · С 1978 года</p>
+    <h1 class="hero-title">Знания, которые<br><em>открывают двери</em></h1>
+    <p class="hero-desc">Мактаби №1 — место, где каждый ребёнок раскрывает свой потенциал, а учителя становятся наставниками на всю жизнь.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#programmes">Наши программы</a>
+      <a class="btn-outline" href="#about">Узнать больше</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="stat-card">
+      <div class="stat-icon gold">🏆</div>
+      <div>
+        <div class="stat-num">94%</div>
+        <div class="stat-label">Поступают в вузы после выпуска</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue">👩‍🎓</div>
+      <div>
+        <div class="stat-num">1 200</div>
+        <div class="stat-label">Учеников в этом году</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">📚</div>
+      <div>
+        <div class="stat-num">68</div>
+        <div class="stat-label">Опытных педагогов</div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <p>📅 Приём документов</p>
+      <strong>1 апреля — 30 июня 2025 года</strong>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">О нас</p>
+  <h2 class="section-title">Школа с характером и традицией</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Мактаби №1 — одна из старейших школ Душанбе. За четыре десятилетия мы воспитали тысячи выпускников: учёных, врачей, инженеров, артистов и государственных деятелей.</p>
+      <p>Мы верим, что образование — это не только знания, но и ценности, характер, умение мыслить. Наша задача — дать каждому ребёнку инструменты, чтобы он сам выстроил своё будущее.</p>
+      <p>Классы оснащены современным оборудованием, библиотека насчитывает более 40 000 томов, а спортивный комплекс работает с 7 утра до 20 вечера.</p>
+    </div>
+    <ul class="values-list">
+      <li><span class="dot"></span>Индивидуальный подход к каждому ученику</li>
+      <li><span class="dot"></span>Сильный преподавательский состав с учёными степенями</li>
+      <li><span class="dot"></span>Олимпиадная подготовка по всем предметам</li>
+      <li><span class="dot"></span>Развитая внеклассная жизнь: театр, музыка, спорт</li>
+      <li><span class="dot"></span>Партнёрство с университетами России и Европы</li>
+      <li><span class="dot"></span>Безопасная и дружелюбная среда</li>
+      <li><span class="dot"></span>Психологическая служба и социальная поддержка</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROGRAMMES -->
+<section id="programmes">
+  <p class="section-label">Направления</p>
+  <h2 class="section-title">Найдите своё призвание</h2>
+  <div class="prog-grid">
+    <div class="prog-card">
+      <span class="prog-emoji">🔬</span>
+      <div class="prog-name">Естественные науки</div>
+      <div class="prog-desc">Физика, химия, биология. Углублённая программа с лабораторными практикумами и участием в научных конференциях.</div>
+      <span class="prog-tag">10–11 класс</span>
+    </div>
+    <div class="prog-card">
+      <span class="prog-emoji">📐</span>
+      <div class="prog-name">Математика и IT</div>
+      <div class="prog-desc">Алгебра, геометрия, программирование на Python. Подготовка к олимпиадам и международным соревнованиям.</div>
+      <span class="prog-tag">5–11 класс</span>
+    </div>
+    <div class="prog-card">
+      <span class="prog-emoji">🌍</span>
+      <div class="prog-name">Гуманитарные науки</div>
+      <div class="prog-desc">История, литература, обществознание. Дискуссионный клуб, дебаты, работа с первоисточниками.</div>
+      <span class="prog-tag">1–11 класс</span>
+    </div>
+    <div class="prog-card">
+      <span class="prog-emoji">🌐</span>
+      <div class="prog-name">Иностранные языки</div>
+      <div class="prog-desc">Русский, английский, французский. Языковые обмены, носители языка в классе, подготовка к IELTS и DELF.</div>
+      <span class="prog-tag">1–11 класс</span>
+    </div>
+    <div class="prog-card">
+      <span class="prog-emoji">🎨</span>
+      <div class="prog-name">Искусство и творчество</div>
+      <div class="prog-desc">Изобразительное искусство, музыка, театральная студия. Ежегодные выставки и городские фестивали.</div>
+      <span class="prog-tag">1–9 класс</span>
+    </div>
+    <div class="prog-card">
+      <span class="prog-emoji">⚽</span>
+      <div class="prog-name">Физическое воспитание</div>
+      <div class="prog-desc">Футбол, баскетбол, лёгкая атлетика, настольный теннис. Сборные школы участвуют в городских чемпионатах.</div>
+      <span class="prog-tag">1–11 класс</span>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHERS -->
+<section class="teachers-section" id="teachers">
+  <p class="section-label" style="color: var(--gold);">Педагоги</p>
+  <h2 class="section-title">Те, кто вдохновляют</h2>
+  <div class="teachers-grid">
+    <div class="teacher-card">
+      <div class="teacher-avatar" style="background:#f0dcaa;">🧑‍🏫</div>
+      <div class="teacher-name">Нилуфар Рашидова</div>
+      <div class="teacher-subject">Математика · 22 года опыта</div>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-avatar" style="background:#d6e4f7;">👨‍🔬</div>
+      <div class="teacher-name">Дмитрий Козлов</div>
+      <div class="teacher-subject">Физика · к.ф.-м.н.</div>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-avatar" style="background:#d4edda;">👩‍💻</div>
+      <div class="teacher-name">Зухра Мирзоева</div>
+      <div class="teacher-subject">Информатика · Python</div>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-avatar" style="background:#fad7d7;">👨‍🎨</div>
+      <div class="teacher-name">Алексей Смирнов</div>
+      <div class="teacher-subject">Литература и история</div>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-avatar" style="background:#e8d6f7;">👩‍🎤</div>
+      <div class="teacher-name">Мариам Юсупова</div>
+      <div class="teacher-subject">Английский язык</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news" style="background: var(--cream);">
+  <p class="section-label">Новости</p>
+  <h2 class="section-title">Жизнь школы</h2>
+  <div class="news-grid">
+    <div class="news-card featured">
+      <div class="news-date">12 июня 2025</div>
+      <div class="news-title">Выпускной вечер 2025: прощание и новое начало</div>
+      <div class="news-excerpt">Сто двенадцать одиннадцатиклассников получили аттестаты на торжественной церемонии в актовом зале. Директор поздравила каждого выпускника лично.</div>
+    </div>
+    <div class="news-card">
+      <div class="news-date">28 мая 2025</div>
+      <div class="news-title">Победа на городской олимпиаде по математике</div>
+      <div class="news-excerpt">Ученица 10-го класса Амина Саидова заняла первое место среди 200 участников.</div>
+    </div>
+    <div class="news-card">
+      <div class="news-date">5 мая 2025</div>
+      <div class="news-title">Театральная студия показала премьеру «Маленький принц»</div>
+      <div class="news-excerpt">Спектакль прошёл три раза подряд при полном зале. Отдельные аплодисменты — сценографии 7-го класса.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTS -->
+<section class="contacts-section" id="contacts">
+  <p class="section-label">Контакты</p>
+  <h2 class="section-title">Будем рады ответить</h2>
+  <div class="contacts-grid">
+    <div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Адрес</div>
+          <div class="contact-value">ул. Рудаки, 1, Душанбе, Таджикистан</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Телефон</div>
+          <div class="contact-value">+992 (37) 221-47-47</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Электронная почта</div>
+          <div class="contact-value">info@school47.tj</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">Приёмные часы</div>
+          <div class="contact-value">Пн–Пт: 8:00–17:00</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form onsubmit="handleForm(event)">
+        <input type="text" placeholder="Ваше имя" required>
+        <input type="tel" placeholder="Номер телефона">
+        <input type="email" placeholder="Электронная почта" required>
+        <textarea placeholder="Ваш вопрос или сообщение"></textarea>
+        <button type="submit">Отправить сообщение</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 Мактаби №1, Душанбе. Все права защищены.</div>
+  <div style="display:flex; gap:1.5rem;">
+    <a href="#">Политика конфиденциальности</a>
+    <a href="#">Устав школы</a>
+    <a href="#">Карта сайта</a>
+  </div>
+</footer>
+
+<script>
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = '✓ Отправлено!';
+  btn.style.background = '#1d4e89';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Отправить сообщение';
+    btn.style.background = '';
+    btn.disabled = false;
+    e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
